@@ -1,5 +1,6 @@
 /* ==========================================================================
    ROMANTIC BIRTHDAY WEBSITE — INTERACTIVITY, AUDIO & RONALDO SURPRISE
+   (DIRECT ROOT FILES + ANDROID MOBILE FRIENDLY)
    ========================================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -9,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const scrollProgressBar = document.getElementById('scrollProgressBar');
   const floatingHeartsContainer = document.getElementById('floatingHearts');
 
-  // Audio Elements
+  // Audio Elements (Directly in the same folder: audio1, audio2, audio3)
   const bgMusic = document.getElementById('bgMusic');
   const voiceNoteAudio = document.getElementById('voiceNoteAudio');
   const ronaldoAudio = document.getElementById('ronaldoAudio');
@@ -34,39 +35,68 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // State Tracking
   let isExperienceStarted = false;
-  let isBgMusicPlaying = false;
   let wasBgMusicPlayingBeforeVoice = false;
-  let normalBgVolume = 0.65;
-  let duckedBgVolume = 0.12;
+  const normalBgVolume = 0.65;
+  const duckedBgVolume = 0.12;
   bgMusic.volume = normalBgVolume;
 
   /* --------------------------------------------------------------------------
-     1. GRACEFUL IMAGE FALLBACK (IF LOCAL FILES ARE NOT YET PLACED IN FOLDER)
+     1. SMART DIRECT ROOT FILE RESOLVER (image1..image11 & audio1..audio3)
+        Automatically checks imageN.jpeg, imageN.jpg, imageN.png, or imageN
+        directly in the same folder without needing any subfolders!
      -------------------------------------------------------------------------- */
+  const imgExtensions = ['.jpeg', '.jpg', '.png', '.webp', ''];
   const allImages = document.querySelectorAll('img');
+
   allImages.forEach((img) => {
+    let extIndex = 0;
+    const baseName =
+      img.getAttribute('data-base') ||
+      (img.getAttribute('src') || '').replace(/\.[^/.]+$/, '').replace(/^photo\//, '');
+
     img.addEventListener('error', function handleImgError() {
+      extIndex += 1;
+      if (extIndex < imgExtensions.length) {
+        this.src = baseName + imgExtensions[extIndex];
+        return;
+      }
       if (this.dataset.fallbackApplied === 'true') return;
       this.dataset.fallbackApplied = 'true';
-      const srcPath = this.getAttribute('src') || 'photo';
-      const isRonaldo = srcPath.includes('image1.jpeg');
-      const bgGrad = isRonaldo
-        ? '%23dfeee3'
-        : '%23eff7f1';
+      const isRonaldo = baseName === 'image1';
+      const bgGrad = isRonaldo ? '%23dfeee3' : '%23eff7f1';
       const accentColor = isRonaldo ? '%23244031' : '%23d87a94';
       const emoji = isRonaldo ? '⚡ SUIIII! ⚡' : '💌';
-      const svgPlaceholder =
-        "data:image/svg+xml;utf8," +
+      this.src =
+        'data:image/svg+xml;utf8,' +
         encodeURIComponent(
           `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">` +
             `<rect width="400" height="400" fill="${decodeURIComponent(bgGrad)}"/>` +
             `<circle cx="200" cy="175" r="56" fill="#ffffff" opacity="0.85"/>` +
             `<text x="200" y="190" text-anchor="middle" font-family="Georgia, serif" font-size="34" fill="${decodeURIComponent(accentColor)}">${emoji}</text>` +
-            `<text x="200" y="275" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="600" fill="#244031">${srcPath}</text>` +
-            `<text x="200" y="302" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#436251">Place your photo at ${srcPath}</text>` +
+            `<text x="200" y="275" text-anchor="middle" font-family="sans-serif" font-size="18" font-weight="600" fill="#244031">${baseName}</text>` +
           `</svg>`
         );
-      this.src = svgPlaceholder;
+    });
+  });
+
+  // Smart audio extension fallback for audio1, audio2, audio3 in the same folder
+  const audioCandidates = {
+    audio1: ['audio1.mpeg', 'audio1.mp3', 'audio1.ogg', 'audio1.wav', 'audio1'],
+    audio2: ['audio2.ogg', 'audio2.mpeg', 'audio2.mp3', 'audio2.m4a', 'audio2.wav', 'audio2'],
+    audio3: ['audio3.mpeg', 'audio3.mp3', 'audio3.ogg', 'audio3.wav', 'audio3']
+  };
+
+  [bgMusic, voiceNoteAudio, ronaldoAudio].forEach((audioEl) => {
+    if (!audioEl) return;
+    const baseKey = audioEl.getAttribute('data-base');
+    const candidates = audioCandidates[baseKey] || [];
+    let candidateIdx = 0;
+    audioEl.addEventListener('error', () => {
+      candidateIdx += 1;
+      if (candidateIdx < candidates.length) {
+        audioEl.src = candidates[candidateIdx];
+        audioEl.load();
+      }
     });
   });
 
@@ -75,15 +105,16 @@ document.addEventListener('DOMContentLoaded', () => {
      -------------------------------------------------------------------------- */
   function createFloatingHearts() {
     const symbols = ['♡', '♥', '💌', '✨', '🌸'];
-    const count = 18;
+    const isMobile = window.innerWidth <= 600;
+    const count = isMobile ? 12 : 18;
     for (let i = 0; i < count; i++) {
       const span = document.createElement('span');
       span.className = 'floating-particle';
       span.textContent = symbols[i % symbols.length];
-      const leftPos = Math.random() * 96 + 2;
+      const leftPos = Math.random() * 94 + 3;
       const duration = 12 + Math.random() * 14;
       const delay = Math.random() * 12;
-      const size = 0.85 + Math.random() * 0.75;
+      const size = 0.85 + Math.random() * 0.65;
       span.style.left = `${leftPos}%`;
       span.style.animationDuration = `${duration}s`;
       span.style.animationDelay = `-${delay}s`;
@@ -95,10 +126,9 @@ document.addEventListener('DOMContentLoaded', () => {
   createFloatingHearts();
 
   /* --------------------------------------------------------------------------
-     3. BACKGROUND MUSIC & WELCOME SCREEN UNLOCK
+     3. BACKGROUND MUSIC & ANDROID TOUCH AUDIO UNLOCK
      -------------------------------------------------------------------------- */
   function updateMusicUI(playing) {
-    isBgMusicPlaying = playing;
     if (playing) {
       musicToggleBtn.classList.add('playing');
       musicStatusText.textContent = 'Playing Song';
@@ -122,16 +152,35 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  // Unlock Ronaldo audio element during initial user tap so Android Chrome
+  // allows playing audio3 when triggered by scroll events later
+  function unlockSecondaryAudioForAndroid() {
+    ronaldoAudio.muted = true;
+    const p = ronaldoAudio.play();
+    if (p !== undefined) {
+      p.then(() => {
+        ronaldoAudio.pause();
+        ronaldoAudio.currentTime = 0;
+        ronaldoAudio.muted = false;
+      }).catch(() => {
+        ronaldoAudio.muted = false;
+      });
+    } else {
+      ronaldoAudio.muted = false;
+    }
+  }
+
   function unlockAndStartExperience() {
     if (isExperienceStarted) return;
     isExperienceStarted = true;
     body.classList.remove('locked');
     welcomeOverlay.classList.add('dismissed');
     startBackgroundMusic();
+    unlockSecondaryAudioForAndroid();
     triggerInitialReveals();
   }
 
-  // Attempt autoplay on page load if browser permits
+  // Attempt autoplay on page load if permitted
   const initialAutoplay = bgMusic.play();
   if (initialAutoplay !== undefined) {
     initialAutoplay
@@ -139,7 +188,6 @@ document.addEventListener('DOMContentLoaded', () => {
         updateMusicUI(true);
       })
       .catch(() => {
-        // Autoplay blocked by browser until user clicks "Open Your Surprise 💌"
         updateMusicUI(false);
       });
   }
@@ -170,7 +218,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       });
     },
-    { threshold: 0.16, rootMargin: '0px 0px -40px 0px' }
+    { threshold: 0.14, rootMargin: '0px 0px -30px 0px' }
   );
 
   revealElements.forEach((el) => revealObserver.observe(el));
@@ -192,13 +240,13 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       });
     },
-    { threshold: 0.35 }
+    { threshold: 0.3 }
   );
 
   pageSections.forEach((sec) => sectionObserver.observe(sec));
 
   /* --------------------------------------------------------------------------
-     5. VOICE NOTE CUSTOM AUDIO PLAYER (PAGE 4)
+     5. VOICE NOTE CUSTOM AUDIO PLAYER (PAGE 4) — WITH ANDROID TOUCH SEEK
      -------------------------------------------------------------------------- */
   function formatTime(seconds) {
     if (!Number.isFinite(seconds) || seconds < 0) return '0:00';
@@ -248,7 +296,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   voicePlayBtn.addEventListener('click', () => {
     if (voiceNoteAudio.paused) {
-      // Pause background song while listening to the personal voice note
       wasBgMusicPlayingBeforeVoice = !bgMusic.paused;
       if (wasBgMusicPlayingBeforeVoice) {
         bgMusic.pause();
@@ -272,21 +319,32 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  voiceProgressWrap.addEventListener('click', (e) => {
+  function seekVoiceNote(clientX) {
     const rect = voiceProgressWrap.getBoundingClientRect();
-    const clickX = e.clientX - rect.left;
+    const clickX = clientX - rect.left;
     const ratio = Math.max(0, Math.min(1, clickX / rect.width));
     if (Number.isFinite(voiceNoteAudio.duration) && voiceNoteAudio.duration > 0) {
       voiceNoteAudio.currentTime = ratio * voiceNoteAudio.duration;
     }
+  }
+
+  voiceProgressWrap.addEventListener('click', (e) => {
+    seekVoiceNote(e.clientX);
   });
+
+  voiceProgressWrap.addEventListener(
+    'touchstart',
+    (e) => {
+      if (e.touches && e.touches[0]) {
+        seekVoiceNote(e.touches[0].clientX);
+      }
+    },
+    { passive: true }
+  );
 
   /* --------------------------------------------------------------------------
      6. SPECIAL SURPRISE: RONALDO SUIIII SCROLL TRIGGER & AUDIO SYNC
      -------------------------------------------------------------------------- */
-  // Controlled random scroll checkpoints so Ronaldo pops up unexpectedly
-  // while scrolling through the page without triggering immediately on load
-  // or repeating at the same scroll position.
   const triggerCheckpoints = [
     { minRatio: 0.24, maxRatio: 0.34, triggered: false },
     { minRatio: 0.54, maxRatio: 0.65, triggered: false },
@@ -305,7 +363,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!isExperienceStarted || isRonaldoActive) return;
 
     const now = Date.now();
-    // Enforce cooldown so surprise feels spontaneous and never overlaps
     if (now - lastRonaldoTimestamp < 9000) return;
 
     isRonaldoActive = true;
@@ -316,23 +373,19 @@ document.addEventListener('DOMContentLoaded', () => {
       clearTimeout(ronaldoHideTimer);
     }
 
-    // Duck background music volume while Ronaldo SUIIII sound plays
     if (!bgMusic.paused) {
       bgMusic.volume = duckedBgVolume;
     }
 
-    // Show Ronaldo visual popup immediately synchronized with sound effect
     ronaldoOverlay.classList.remove('exiting');
     ronaldoOverlay.classList.add('active');
     ronaldoOverlay.setAttribute('aria-hidden', 'false');
 
-    // Play audio/audio3.mpeg synchronized with the popup entrance
+    ronaldoAudio.muted = false;
     ronaldoAudio.currentTime = 0;
     const soundPromise = ronaldoAudio.play();
     if (soundPromise !== undefined) {
-      soundPromise.catch(() => {
-        // Fallback timer if local audio3.mpeg file is not yet placed
-      });
+      soundPromise.catch(() => {});
     }
 
     const dismissRonaldo = () => {
@@ -342,7 +395,6 @@ document.addEventListener('DOMContentLoaded', () => {
         ronaldoOverlay.classList.remove('active', 'exiting');
         ronaldoOverlay.setAttribute('aria-hidden', 'true');
         isRonaldoActive = false;
-        // Restore background music volume smoothly
         if (!bgMusic.paused) {
           bgMusic.volume = normalBgVolume;
         }
@@ -360,12 +412,10 @@ document.addEventListener('DOMContentLoaded', () => {
       const docHeight = document.documentElement.scrollHeight - window.innerHeight;
       const scrollRatio = docHeight > 0 ? Math.min(1, Math.max(0, scrollTop / docHeight)) : 0;
 
-      // Update top scroll progress bar
       scrollProgressBar.style.width = `${scrollRatio * 100}%`;
 
       if (!isExperienceStarted || scrollRatio < 0.16) return;
 
-      // Check if user crossed an untriggered scroll checkpoint
       for (const point of triggerCheckpoints) {
         if (!point.triggered && Math.abs(scrollRatio - point.targetRatio) <= 0.035) {
           point.triggered = true;
@@ -374,7 +424,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       }
 
-      // Re-arm a checkpoint only if the user scrolls far away (>38% page distance)
       if (lastTriggeredRatio >= 0 && Math.abs(scrollRatio - lastTriggeredRatio) > 0.38) {
         triggerCheckpoints.forEach((pt) => {
           if (Math.abs(scrollRatio - pt.targetRatio) > 0.35) {
