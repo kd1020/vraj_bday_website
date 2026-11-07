@@ -1,5 +1,6 @@
 /* ==========================================================================
    ROMANTIC BIRTHDAY WEBSITE — PREMIUM WHITE & PASTEL SAGE AESTHETIC
+   (ANDROID & MOBILE OPTIMIZED)
    ========================================================================== */
 
 :root {
@@ -29,11 +30,13 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  -webkit-tap-highlight-color: transparent;
 }
 
 html {
   scroll-behavior: smooth;
   font-size: 16px;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
@@ -43,10 +46,18 @@ body {
   line-height: 1.65;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
+  overscroll-behavior-y: none;
 }
 
 body.locked {
   overflow: hidden;
+  height: 100vh;
+  height: 100dvh;
+}
+
+button,
+a {
+  touch-action: manipulation;
 }
 
 .hidden {
@@ -109,7 +120,7 @@ body.locked {
 }
 
 /* ==========================================================================
-   WELCOME OVERLAY (BROWSER AUTOPLAY UNLOCK)
+   WELCOME OVERLAY (BROWSER & ANDROID AUTOPLAY UNLOCK)
    ========================================================================== */
 
 .welcome-overlay {
@@ -119,7 +130,7 @@ body.locked {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 1.5rem;
+  padding: 1.25rem;
   background: radial-gradient(circle at center, #ffffff 0%, var(--pastel-green-light) 65%, var(--pastel-green-mid) 100%);
   transition: opacity 0.85s cubic-bezier(0.22, 1, 0.36, 1), visibility 0.85s;
 }
@@ -131,13 +142,13 @@ body.locked {
 }
 
 .welcome-card {
-  max-width: 460px;
+  max-width: 440px;
   width: 100%;
-  background: rgba(255, 255, 255, 0.92);
+  background: rgba(255, 255, 255, 0.94);
   backdrop-filter: blur(14px);
   border: 1px solid var(--card-border);
   border-radius: 28px;
-  padding: 3rem 2.25rem;
+  padding: 2.5rem 1.75rem;
   text-align: center;
   box-shadow: var(--shadow-soft), var(--shadow-glow);
   animation: gentleFloat 4s ease-in-out infinite;
@@ -150,43 +161,43 @@ body.locked {
 
 .welcome-badge {
   display: inline-block;
-  font-size: 0.75rem;
-  letter-spacing: 0.16em;
+  font-size: 0.72rem;
+  letter-spacing: 0.15em;
   text-transform: uppercase;
   color: var(--dark-green-muted);
   background: var(--pastel-green-light);
   border: 1px solid var(--card-border);
-  padding: 0.4rem 1rem;
+  padding: 0.4rem 0.95rem;
   border-radius: 999px;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.35rem;
 }
 
 .welcome-envelope {
-  width: 78px;
-  height: 78px;
-  margin: 0 auto 1.25rem;
+  width: 74px;
+  height: 74px;
+  margin: 0 auto 1.15rem;
   border-radius: 50%;
   background: linear-gradient(135deg, var(--pastel-green-light), var(--pink-soft-bg));
   border: 1px solid rgba(216, 122, 148, 0.3);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 2.2rem;
+  font-size: 2.1rem;
   box-shadow: 0 10px 25px rgba(216, 122, 148, 0.18);
 }
 
 .welcome-title {
   font-family: var(--font-serif);
-  font-size: 2.6rem;
+  font-size: clamp(2.1rem, 6vw, 2.6rem);
   font-weight: 600;
   color: var(--dark-green);
   margin-bottom: 0.65rem;
 }
 
 .welcome-subtitle {
-  font-size: 0.96rem;
+  font-size: 0.95rem;
   color: var(--dark-green-muted);
-  margin-bottom: 2rem;
+  margin-bottom: 1.85rem;
   line-height: 1.6;
 }
 
@@ -195,12 +206,14 @@ body.locked {
   align-items: center;
   justify-content: center;
   gap: 0.6rem;
+  width: 100%;
+  max-width: 280px;
   background: linear-gradient(135deg, var(--dark-green), #335c47);
   color: #ffffff;
   font-family: var(--font-sans);
   font-size: 1rem;
   font-weight: 500;
-  padding: 0.95rem 2.1rem;
+  padding: 1rem 1.75rem;
   border: none;
   border-radius: 999px;
   cursor: pointer;
@@ -214,7 +227,7 @@ body.locked {
 }
 
 .welcome-btn:active {
-  transform: translateY(0) scale(0.99);
+  transform: translateY(0) scale(0.98);
 }
 
 /* ==========================================================================
@@ -277,20 +290,20 @@ body.locked {
 
 .floating-music-widget {
   position: fixed;
-  bottom: 1.4rem;
-  right: 1.4rem;
+  bottom: max(1rem, env(safe-area-inset-bottom, 1rem));
+  right: 1rem;
   z-index: 850;
 }
 
 .music-toggle-btn {
   display: inline-flex;
   align-items: center;
-  gap: 0.65rem;
-  background: rgba(255, 255, 255, 0.92);
+  gap: 0.6rem;
+  background: rgba(255, 255, 255, 0.94);
   backdrop-filter: blur(12px);
   border: 1px solid var(--card-border);
   border-radius: 999px;
-  padding: 0.65rem 1.15rem;
+  padding: 0.65rem 1.1rem;
   color: var(--dark-green);
   font-family: var(--font-sans);
   font-size: 0.82rem;
@@ -346,7 +359,8 @@ body.locked {
 .page-section {
   position: relative;
   min-height: 100vh;
-  padding: 5.5rem 1.5rem;
+  min-height: 100dvh;
+  padding: 5rem 1.25rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -369,36 +383,37 @@ body.locked {
 
 .home-section {
   background: radial-gradient(circle at 50% 25%, #ffffff 0%, #f5fbf6 65%, #eaf5ed 100%);
-  padding-top: 4rem;
-  padding-bottom: 4.5rem;
+  padding-top: 3.5rem;
+  padding-bottom: 4rem;
 }
 
 .hero-header {
   text-align: center;
-  margin-bottom: 2.75rem;
+  margin-bottom: 2.25rem;
 }
 
 .hero-eyebrow {
   display: inline-block;
-  font-size: 0.78rem;
+  font-size: 0.75rem;
   text-transform: uppercase;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.18em;
   color: var(--dark-green-muted);
   background: rgba(255, 255, 255, 0.85);
   border: 1px solid var(--card-border);
-  padding: 0.35rem 1.1rem;
+  padding: 0.35rem 1rem;
   border-radius: 999px;
-  margin-bottom: 1rem;
+  margin-bottom: 0.9rem;
 }
 
 .hero-heading {
   font-family: var(--font-serif);
-  font-size: clamp(2.5rem, 5.5vw, 4.4rem);
+  font-size: clamp(2.2rem, 6vw, 4.4rem);
   font-weight: 600;
   color: var(--dark-green);
-  line-height: 1.12;
+  line-height: 1.15;
   letter-spacing: -0.01em;
   text-shadow: 0 4px 24px rgba(132, 169, 140, 0.22);
+  padding: 0 0.25rem;
 }
 
 .hero-divider {
@@ -406,11 +421,11 @@ body.locked {
   align-items: center;
   justify-content: center;
   gap: 0.85rem;
-  margin-top: 1.1rem;
+  margin-top: 1rem;
 }
 
 .divider-line {
-  width: 64px;
+  width: 56px;
   height: 1px;
   background: linear-gradient(90deg, transparent, var(--sage-green), transparent);
 }
@@ -422,12 +437,12 @@ body.locked {
 
 /*
   SKETCH COLLAGE LAYOUT:
-  Matches the attached hand-drawn diagram:
+  Matches the attached hand-drawn diagram on både Desktop & Android Mobile:
   - Center: Large square ("photo 1")
-  - Upper-left: Smaller square ("photo 4") positioned just above-left of center's top-left corner
-  - Upper-right: Smaller square ("photo 3") positioned higher up and to the right
-  - Bottom-left: Smaller square ("2nd photo") positioned lower-left
-  - Bottom-right: Smaller square ("photo 5") positioned lower-right
+  - Upper-left: Smaller square ("photo 4")
+  - Upper-right: Smaller square ("photo 3")
+  - Bottom-left: Smaller square ("2nd photo")
+  - Bottom-right: Smaller square ("photo 5")
 */
 .sketch-collage {
   position: relative;
@@ -458,7 +473,7 @@ body.locked {
   width: 100%;
   height: 100%;
   aspect-ratio: 1 / 1;
-  border-radius: 15px;
+  border-radius: 14px;
   overflow: hidden;
   background: linear-gradient(135deg, var(--pastel-green-light), var(--pink-soft-bg));
   position: relative;
@@ -493,7 +508,7 @@ body.locked {
   transform: translate(-50%, -50%) scale(1.03);
 }
 
-/* 2. Upper-Left Smaller Square (Sketch: photo 4 — near top-left of center photo) */
+/* 2. Upper-Left Smaller Square (Sketch: photo 4) */
 .collage-upper-left {
   width: 185px;
   height: 185px;
@@ -506,7 +521,7 @@ body.locked {
   transform: rotate(0deg) translateY(-5px) scale(1.04);
 }
 
-/* 3. Upper-Right Smaller Square (Sketch: photo 3 — higher up on the right) */
+/* 3. Upper-Right Smaller Square (Sketch: photo 3) */
 .collage-upper-right {
   width: 180px;
   height: 180px;
@@ -519,7 +534,7 @@ body.locked {
   transform: rotate(0deg) translateY(-5px) scale(1.04);
 }
 
-/* 4. Bottom-Left Smaller Square (Sketch: 2nd photo — lower and further left) */
+/* 4. Bottom-Left Smaller Square (Sketch: 2nd photo) */
 .collage-bottom-left {
   width: 185px;
   height: 185px;
@@ -532,7 +547,7 @@ body.locked {
   transform: rotate(0deg) translateY(-5px) scale(1.04);
 }
 
-/* 5. Bottom-Right Smaller Square (Sketch: photo 5 — lower right below center) */
+/* 5. Bottom-Right Smaller Square (Sketch: photo 5) */
 .collage-bottom-right {
   width: 185px;
   height: 185px;
@@ -547,7 +562,7 @@ body.locked {
 
 .scroll-cue {
   text-align: center;
-  margin-top: 2rem;
+  margin-top: 1.75rem;
 }
 
 .scroll-cue-link {
@@ -557,7 +572,7 @@ body.locked {
   gap: 0.35rem;
   text-decoration: none;
   color: var(--dark-green-muted);
-  font-size: 0.85rem;
+  font-size: 0.84rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   transition: color 0.25s ease;
@@ -614,16 +629,16 @@ body.locked {
 .letter-card {
   position: relative;
   background: var(--bg-white);
-  border-radius: 32px;
-  padding: clamp(2.25rem, 5vw, 4.25rem);
+  border-radius: 28px;
+  padding: clamp(1.75rem, 5vw, 4.25rem);
   border: 1px solid rgba(132, 169, 140, 0.35);
   box-shadow: 0 28px 65px -15px rgba(36, 64, 49, 0.12), var(--shadow-glow);
 }
 
 .letter-corner-accent {
   position: absolute;
-  width: 68px;
-  height: 68px;
+  width: 52px;
+  height: 52px;
   border-color: var(--sage-green-soft);
   border-style: solid;
   opacity: 0.55;
@@ -631,30 +646,30 @@ body.locked {
 }
 
 .letter-corner-accent.top-left {
-  top: 22px;
-  left: 22px;
+  top: 16px;
+  left: 16px;
   border-width: 2px 0 0 2px;
-  border-top-left-radius: 16px;
+  border-top-left-radius: 14px;
 }
 
 .letter-corner-accent.bottom-right {
-  bottom: 22px;
-  right: 22px;
+  bottom: 16px;
+  right: 16px;
   border-width: 0 2px 2px 0;
-  border-bottom-right-radius: 16px;
+  border-bottom-right-radius: 14px;
 }
 
 .letter-seal {
-  width: 56px;
-  height: 56px;
-  margin: 0 auto 1.75rem;
+  width: 54px;
+  height: 54px;
+  margin: 0 auto 1.5rem;
   border-radius: 50%;
   background: var(--pink-soft-bg);
   border: 1px solid var(--pink-accent);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.55rem;
+  font-size: 1.5rem;
   box-shadow: 0 8px 20px rgba(216, 122, 148, 0.18);
 }
 
@@ -664,25 +679,25 @@ body.locked {
 
 .letter-salutation {
   font-family: var(--font-serif);
-  font-size: clamp(1.65rem, 3vw, 2.2rem);
+  font-size: clamp(1.5rem, 4.5vw, 2.2rem);
   font-weight: 600;
   color: var(--dark-green);
-  margin-bottom: 1.25rem;
+  margin-bottom: 1.15rem;
 }
 
 .letter-body {
   font-family: var(--font-serif);
-  font-size: clamp(1.22rem, 2.2vw, 1.48rem);
+  font-size: clamp(1.18rem, 3.8vw, 1.48rem);
   font-weight: 500;
-  line-height: 1.95;
+  line-height: 1.88;
   color: var(--dark-green);
-  margin-bottom: 2rem;
+  margin-bottom: 1.85rem;
   letter-spacing: 0.01em;
 }
 
 .letter-signature {
   font-family: var(--font-script);
-  font-size: clamp(1.65rem, 3vw, 2.15rem);
+  font-size: clamp(1.55rem, 5vw, 2.15rem);
   font-weight: 600;
   color: var(--dark-green);
   text-align: right;
@@ -710,18 +725,18 @@ body.locked {
 
 .memories-section {
   background: linear-gradient(180deg, #eff7f1 0%, #ffffff 18%, #ffffff 82%, #f3faf5 100%);
-  padding-top: 6rem;
-  padding-bottom: 6rem;
+  padding-top: 5rem;
+  padding-bottom: 5rem;
 }
 
 .section-header {
   text-align: center;
-  margin-bottom: 4rem;
+  margin-bottom: 3.25rem;
 }
 
 .section-tag {
   display: inline-block;
-  font-size: 0.76rem;
+  font-size: 0.74rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--dark-green-muted);
@@ -729,26 +744,26 @@ body.locked {
   border: 1px solid var(--card-border);
   padding: 0.35rem 1rem;
   border-radius: 999px;
-  margin-bottom: 0.85rem;
+  margin-bottom: 0.8rem;
 }
 
 .section-title {
   font-family: var(--font-serif);
-  font-size: clamp(2.1rem, 4vw, 3.1rem);
+  font-size: clamp(2rem, 5.5vw, 3.1rem);
   font-weight: 600;
   color: var(--dark-green);
   margin-bottom: 0.4rem;
 }
 
 .section-subtitle {
-  font-size: 0.98rem;
+  font-size: 0.95rem;
   color: var(--dark-green-muted);
 }
 
 .memories-list {
   display: flex;
   flex-direction: column;
-  gap: 4rem;
+  gap: 3.5rem;
 }
 
 .memory-row {
@@ -765,11 +780,11 @@ body.locked {
 
 .memory-photo-wrapper {
   width: 100%;
-  max-width: 370px;
+  max-width: 360px;
   aspect-ratio: 1 / 1;
   background: #ffffff;
-  padding: 12px;
-  border-radius: 26px;
+  padding: 10px;
+  border-radius: 24px;
   border: 1px solid var(--card-border);
   box-shadow: var(--shadow-soft);
   overflow: hidden;
@@ -787,7 +802,7 @@ body.locked {
   height: 100%;
   aspect-ratio: 1 / 1;
   object-fit: cover;
-  border-radius: 18px;
+  border-radius: 16px;
   display: block;
   background: linear-gradient(135deg, var(--pastel-green-light), var(--pink-soft-bg));
   transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
@@ -817,15 +832,15 @@ body.locked {
 .connector-dot {
   position: relative;
   z-index: 2;
-  width: 42px;
-  height: 42px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   background: var(--bg-white);
   border: 2px solid var(--sage-green);
   color: var(--dark-green);
   font-family: var(--font-serif);
   font-weight: 700;
-  font-size: 0.95rem;
+  font-size: 0.92rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -844,7 +859,7 @@ body.locked {
   background: linear-gradient(145deg, #ffffff 0%, var(--pastel-green-light) 100%);
   border: 1px solid var(--card-border);
   border-radius: 24px;
-  padding: 2.3rem 2rem;
+  padding: 2rem 1.75rem;
   box-shadow: var(--shadow-soft);
   transition: transform 0.35s ease, box-shadow 0.35s ease;
 }
@@ -856,17 +871,17 @@ body.locked {
 
 .quote-mark {
   font-family: var(--font-serif);
-  font-size: 3.4rem;
+  font-size: 3.2rem;
   line-height: 1;
   color: var(--sage-green-soft);
   opacity: 0.55;
   display: block;
-  margin-bottom: -0.6rem;
+  margin-bottom: -0.55rem;
 }
 
 .memory-message-text {
   font-family: var(--font-serif);
-  font-size: clamp(1.35rem, 2.3vw, 1.65rem);
+  font-size: clamp(1.3rem, 4vw, 1.65rem);
   font-weight: 600;
   color: var(--dark-green);
   line-height: 1.55;
@@ -874,8 +889,8 @@ body.locked {
 
 .memory-heart-accent {
   position: absolute;
-  bottom: 1rem;
-  right: 1.25rem;
+  bottom: 0.9rem;
+  right: 1.15rem;
   font-size: 1.15rem;
   opacity: 0.8;
 }
@@ -888,21 +903,22 @@ body.locked {
   background: radial-gradient(circle at 50% 30%, var(--pastel-green-light) 0%, var(--pastel-green-mid) 100%);
   flex-direction: column;
   justify-content: center;
+  padding-bottom: 6rem;
 }
 
 .voicenote-card {
   background: var(--bg-white);
   border: 1px solid var(--card-border);
-  border-radius: 30px;
-  padding: clamp(2rem, 4.5vw, 3.5rem);
+  border-radius: 28px;
+  padding: clamp(1.75rem, 4.5vw, 3.5rem);
   text-align: center;
   box-shadow: var(--shadow-soft), var(--shadow-glow);
-  margin-bottom: 3.5rem;
+  margin-bottom: 3rem;
 }
 
 .voicenote-badge {
   display: inline-block;
-  font-size: 0.75rem;
+  font-size: 0.74rem;
   text-transform: uppercase;
   letter-spacing: 0.16em;
   color: var(--pink-deep);
@@ -910,37 +926,37 @@ body.locked {
   border: 1px solid var(--pink-accent);
   padding: 0.35rem 1rem;
   border-radius: 999px;
-  margin-bottom: 1rem;
+  margin-bottom: 0.9rem;
 }
 
 .voicenote-heading {
   font-family: var(--font-serif);
-  font-size: clamp(2rem, 4vw, 2.85rem);
+  font-size: clamp(1.85rem, 5vw, 2.85rem);
   font-weight: 600;
   color: var(--dark-green);
   margin-bottom: 0.45rem;
 }
 
 .voicenote-caption {
-  font-size: 0.95rem;
+  font-size: 0.94rem;
   color: var(--dark-green-muted);
-  margin-bottom: 2.2rem;
+  margin-bottom: 1.85rem;
 }
 
 .voice-player {
   display: flex;
   align-items: center;
-  gap: 1.35rem;
+  gap: 1.25rem;
   background: linear-gradient(135deg, var(--pastel-green-light), #ffffff);
   border: 1px solid var(--card-border);
   border-radius: 22px;
-  padding: 1.35rem 1.6rem;
+  padding: 1.25rem 1.4rem;
   box-shadow: inset 0 2px 8px rgba(36, 64, 49, 0.04);
 }
 
 .voice-play-btn {
-  width: 60px;
-  height: 60px;
+  width: 58px;
+  height: 58px;
   flex-shrink: 0;
   border-radius: 50%;
   border: none;
@@ -957,6 +973,10 @@ body.locked {
 .voice-play-btn:hover {
   transform: scale(1.06);
   box-shadow: 0 14px 28px rgba(36, 64, 49, 0.32);
+}
+
+.voice-play-btn:active {
+  transform: scale(0.96);
 }
 
 .voice-play-btn svg {
@@ -1009,12 +1029,13 @@ body.locked {
 
 .voice-progress-wrap {
   cursor: pointer;
-  padding: 4px 0;
+  padding: 8px 0;
+  touch-action: none;
 }
 
 .voice-progress-track {
   width: 100%;
-  height: 6px;
+  height: 7px;
   background: rgba(132, 169, 140, 0.25);
   border-radius: 999px;
   overflow: hidden;
@@ -1060,7 +1081,7 @@ body.locked {
 
 .closing-line {
   font-family: var(--font-script);
-  font-size: 2rem;
+  font-size: 1.95rem;
   color: var(--dark-green);
   margin-bottom: 0.2rem;
 }
@@ -1127,6 +1148,7 @@ body.locked {
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 1rem;
   pointer-events: none;
   opacity: 0;
   visibility: hidden;
@@ -1140,10 +1162,10 @@ body.locked {
 
 .ronaldo-popup-card {
   position: relative;
-  width: min(340px, 84vw);
+  width: min(320px, 82vw);
   background: #ffffff;
-  padding: 14px 14px 18px;
-  border-radius: 28px;
+  padding: 12px 12px 16px;
+  border-radius: 26px;
   border: 3px solid var(--dark-green);
   box-shadow: 0 30px 80px rgba(0, 0, 0, 0.32), 0 0 50px rgba(132, 169, 140, 0.8);
   text-align: center;
@@ -1191,8 +1213,8 @@ body.locked {
 
 .ronaldo-burst-ring {
   position: absolute;
-  inset: -12px;
-  border-radius: 36px;
+  inset: -10px;
+  border-radius: 34px;
   border: 3px dashed var(--pink-deep);
   opacity: 0.75;
   animation: spinRing 3s linear infinite;
@@ -1208,10 +1230,10 @@ body.locked {
 .ronaldo-img-box {
   width: 100%;
   aspect-ratio: 1 / 1;
-  border-radius: 20px;
+  border-radius: 18px;
   overflow: hidden;
   background: var(--pastel-green-mid);
-  margin-bottom: 0.85rem;
+  margin-bottom: 0.75rem;
 }
 
 .ronaldo-img-box img {
@@ -1225,50 +1247,50 @@ body.locked {
 .ronaldo-banner {
   font-family: var(--font-sans);
   font-weight: 800;
-  font-size: 1.45rem;
+  font-size: 1.35rem;
   letter-spacing: 0.08em;
   color: var(--dark-green);
   background: linear-gradient(90deg, var(--pastel-green-mid), var(--pink-accent));
-  padding: 0.45rem 1rem;
+  padding: 0.4rem 0.95rem;
   border-radius: 999px;
   display: inline-block;
 }
 
 /* ==========================================================================
-   RESPONSIVE DESIGN (TABLET & MOBILE)
+   RESPONSIVE DESIGN (TABLETS & ANDROID MOBILE PHONES)
    ========================================================================== */
 
 @media (max-width: 900px) {
   .sketch-collage {
-    height: 590px;
-    max-width: 680px;
+    height: 560px;
+    max-width: 640px;
   }
 
   .collage-center {
-    width: 250px;
-    height: 250px;
+    width: 240px;
+    height: 240px;
   }
 
   .collage-upper-left,
   .collage-upper-right,
   .collage-bottom-left,
   .collage-bottom-right {
-    width: 155px;
-    height: 155px;
+    width: 148px;
+    height: 148px;
   }
 
-  .collage-upper-left { left: 6%; top: 7%; }
+  .collage-upper-left { left: 5%; top: 7%; }
   .collage-upper-right { right: 5%; top: 2%; }
   .collage-bottom-left { left: 3%; bottom: 7%; }
-  .collage-bottom-right { right: 6%; bottom: 3%; }
+  .collage-bottom-right { right: 5%; bottom: 3%; }
 
   .memory-row {
     grid-template-columns: 1fr;
-    gap: 1.25rem;
+    gap: 1.1rem;
     text-align: center;
   }
 
-  /* On mobile/tablet, always place photograph above its paired message */
+  /* On Android/mobile, always place photograph above its paired message */
   .memory-row.image-right .memory-photo-col {
     order: 1;
   }
@@ -1279,56 +1301,86 @@ body.locked {
     order: 3;
   }
 
+  .memory-connector {
+    height: 36px;
+  }
+
   .memory-connector::before {
     width: 2px;
     height: 100%;
   }
 
   .section-nav {
-    right: 0.75rem;
+    right: 0.65rem;
     padding: 0.65rem 0.4rem;
   }
 }
 
-@media (max-width: 560px) {
+@media (max-width: 600px) {
   .page-section {
-    padding: 4.25rem 1.15rem;
+    padding: 3.75rem 1rem;
   }
 
-  /* Preserve the 5-photo scattered layout around the center photo on mobile screens */
+  /* Android-friendly proportional 5-photo collage matching the hand-drawn sketch */
   .sketch-collage {
-    height: 460px;
-    max-width: 360px;
+    width: 100%;
+    max-width: 350px;
+    height: 410px;
+    margin: 0 auto;
   }
 
   .collage-center {
-    width: 176px;
-    height: 176px;
-    padding: 8px;
+    width: 47%;
+    height: auto;
+    aspect-ratio: 1 / 1;
+    padding: 7px;
+    border-radius: 20px;
   }
 
   .collage-upper-left,
   .collage-upper-right,
   .collage-bottom-left,
   .collage-bottom-right {
-    width: 112px;
-    height: 112px;
+    width: 31%;
+    height: auto;
+    aspect-ratio: 1 / 1;
     padding: 6px;
     border-radius: 16px;
   }
 
-  .collage-upper-left { left: 2%; top: 6%; }
+  .photo-frame {
+    border-radius: 11px;
+  }
+
+  .collage-upper-left { left: 3%; top: 5%; }
   .collage-upper-right { right: 2%; top: 1%; }
-  .collage-bottom-left { left: 0%; bottom: 6%; }
-  .collage-bottom-right { right: 2%; bottom: 1%; }
+  .collage-bottom-left { left: 1%; bottom: 6%; }
+  .collage-bottom-right { right: 3%; bottom: 2%; }
+
+  .memory-photo-wrapper {
+    max-width: 300px;
+    padding: 8px;
+    border-radius: 20px;
+  }
+
+  .memory-message-card {
+    padding: 1.5rem 1.35rem;
+    border-radius: 20px;
+  }
 
   .voice-player {
     flex-direction: column;
-    padding: 1.25rem;
+    padding: 1.25rem 1.1rem;
+    gap: 1rem;
   }
 
   .voice-track-area {
     width: 100%;
+  }
+
+  .waveform-bars {
+    gap: 2px;
+    height: 32px;
   }
 
   .section-nav {
@@ -1336,7 +1388,19 @@ body.locked {
   }
 
   .floating-music-widget {
-    bottom: 1rem;
-    right: 1rem;
+    bottom: max(0.85rem, env(safe-area-inset-bottom, 0.85rem));
+    right: 0.85rem;
+  }
+
+  .music-toggle-btn {
+    padding: 0.55rem 0.95rem;
+    font-size: 0.78rem;
+  }
+}
+
+@media (max-width: 375px) {
+  .sketch-collage {
+    max-width: 305px;
+    height: 365px;
   }
 }
