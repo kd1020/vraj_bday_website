@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy birthday my V💌</title>
+  <!-- Google Fonts: Cormorant Garamond (Romantic Serif), Plus Jakarta Sans (Clean Modern), Caveat (Handwritten Accent) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="locked">
+
+  <!-- Top Scroll Progress Bar -->
+  <div class="scroll-progress-track" aria-hidden="true">
+    <div class="scroll-progress-bar" id="scrollProgressBar"></div>
+  </div>
+
+  <!-- Ambient Floating Hearts Background Layer -->
+  <div class="floating-hearts-container" id="floatingHearts" aria-hidden="true"></div>
+
+  <!-- Welcome Overlay (Handles Browser Autoplay Restriction Gracefully) -->
+  <div class="welcome-overlay" id="welcomeOverlay" role="dialog" aria-modal="true" aria-labelledby="welcomeTitle">
+    <div class="welcome-card">
+      <div class="welcome-badge">A Personal Birthday Surprise</div>
+      <div class="welcome-envelope" aria-hidden="true">
+        <span class="envelope-heart">💌</span>
+      </div>
+      <h1 class="welcome-title" id="welcomeTitle">For My V</h1>
+      <p class="welcome-subtitle">Turn up your volume for a little birthday magic crafted just for you.</p>
+      <button type="button" class="welcome-btn" id="openSurpriseBtn">
+        <span>Open Your Surprise 💌</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Elegant Floating Section Navigation -->
+  <nav class="section-nav" aria-label="Section Navigation">
+    <a href="#section-home" class="nav-dot active" data-section="section-home" aria-label="Home">
+      <span class="nav-tooltip">Home</span>
+    </a>
+    <a href="#section-message" class="nav-dot" data-section="section-message" aria-label="Birthday Letter">
+      <span class="nav-tooltip">Letter</span>
+    </a>
+    <a href="#section-memories" class="nav-dot" data-section="section-memories" aria-label="Memories">
+      <span class="nav-tooltip">Memories</span>
+    </a>
+    <a href="#section-voicenote" class="nav-dot" data-section="section-voicenote" aria-label="Voice Note">
+      <span class="nav-tooltip">Voice Note</span>
+    </a>
+  </nav>
+
+  <!-- Floating Background Music Control -->
+  <div class="floating-music-widget" id="musicWidget">
+    <button type="button" class="music-toggle-btn" id="musicToggleBtn" aria-label="Pause or play background music">
+      <span class="music-bars" id="musicBars" aria-hidden="true">
+        <span class="m-bar"></span>
+        <span class="m-bar"></span>
+        <span class="m-bar"></span>
+        <span class="m-bar"></span>
+      </span>
+      <span class="music-label" id="musicStatusText">Playing Song</span>
+    </button>
+  </div>
+
+  <!-- Audio Elements with Exact Required Paths -->
+  <audio id="bgMusic" src="audio/audio1.mpeg" loop preload="auto"></audio>
+  <audio id="voiceNoteAudio" src="audio/audio2.ogg" preload="metadata"></audio>
+  <audio id="ronaldoAudio" src="audio/audio3.mpeg" preload="auto"></audio>
+
+  <main id="mainContent">
+
+    <!-- ==========================================
+         PAGE 1: HOME PAGE
+         ========================================== -->
+    <section class="page-section home-section" id="section-home">
+      <div class="section-inner">
+        <header class="hero-header reveal-item">
+          <span class="hero-eyebrow">Celebrating You Today &amp; Always</span>
+          <h1 class="hero-heading">Happy birthday my V💌</h1>
+          <div class="hero-divider" aria-hidden="true">
+            <span class="divider-line"></span>
+            <span class="divider-heart">♥</span>
+            <span class="divider-line"></span>
+          </div>
+        </header>
+
+        <!-- Five-Photo Scattered Collage Matching the Hand-Drawn Sketch -->
+        <div class="sketch-collage" id="homeCollage">
+          <!-- Upper-Left Smaller Square (Sketch: "photo 4") -->
+          <figure class="collage-card collage-upper-left reveal-collage" style="--delay: 0.22s;">
+            <div class="photo-frame">
+              <img src="photo/image5.jpeg" alt="Sweet memory upper left" loading="eager" />
+            </div>
+          </figure>
+
+          <!-- Upper-Right Smaller Square (Sketch: "photo 3") -->
+          <figure class="collage-card collage-upper-right reveal-collage" style="--delay: 0.34s;">
+            <div class="photo-frame">
+              <img src="photo/image4.jpeg" alt="Sweet memory upper right" loading="eager" />
+            </div>
+          </figure>
+
+          <!-- Center Large Square (Sketch: "photo 1") -->
+          <figure class="collage-card collage-center reveal-collage" style="--delay: 0.1s;">
+            <div class="photo-frame">
+              <img src="photo/image2.jpeg" alt="Featured birthday memory center" loading="eager" />
+            </div>
+          </figure>
+
+          <!-- Bottom-Left Smaller Square (Sketch: "2nd photo") -->
+          <figure class="collage-card collage-bottom-left reveal-collage" style="--delay: 0.46s;">
+            <div class="photo-frame">
+              <img src="photo/image3.jpeg" alt="Sweet memory bottom left" loading="eager" />
+            </div>
+          </figure>
+
+          <!-- Bottom-Right Smaller Square (Sketch: "photo 5") -->
+          <figure class="collage-card collage-bottom-right reveal-collage" style="--delay: 0.58s;">
+            <div class="photo-frame">
+              <img src="photo/image6.jpeg" alt="Sweet memory bottom right" loading="eager" />
+            </div>
+          </figure>
+        </div>
+
+        <div class="scroll-cue reveal-item">
+          <a href="#section-message" class="scroll-cue-link" aria-label="Scroll to birthday message">
+            <span class="scroll-cue-text">Read your letter</span>
+            <span class="scroll-cue-arrow">↓</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         PAGE 2: BIRTHDAY MESSAGE
+         ========================================== -->
+    <section class="page-section message-section" id="section-message">
+      <div class="section-ambient-hearts" aria-hidden="true">
+        <span class="ambient-heart h-1">♡</span>
+        <span class="ambient-heart h-2">♥</span>
+        <span class="ambient-heart h-3">♡</span>
+        <span class="ambient-heart h-4">♥</span>
+      </div>
+
+      <div class="section-inner narrow-inner">
+        <div class="letter-card reveal-letter" id="letterCard">
+          <div class="letter-corner-accent top-left" aria-hidden="true"></div>
+          <div class="letter-corner-accent bottom-right" aria-hidden="true"></div>
+
+          <div class="letter-seal" aria-hidden="true">💌</div>
+
+          <!-- Exact Unmodified Paragraph as Requested -->
+          <div class="letter-content">
+            <p class="letter-salutation fade-line" style="--line-delay: 0.1s;">Happy birthday my V💌,</p>
+            <p class="letter-body fade-line" style="--line-delay: 0.35s;">I know birthdays have never been that special to you, but to me, your birthday is even more special than my own. I wish you all the happiness, success, and love in your life 🧿. No matter how hard life gets, I hope nothing ever pulls us apart 🫂I always love you more kanu🥹❤️</p>
+            <p class="letter-signature fade-line" style="--line-delay: 0.65s;">~with love from your chaku💗</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         PAGE 3: FIVE PHOTOGRAPHS WITH PERSONAL MESSAGES
+         ========================================== -->
+    <section class="page-section memories-section" id="section-memories">
+      <div class="section-inner">
+        <div class="section-header reveal-item">
+          <span class="section-tag">Little Reminders</span>
+          <h2 class="section-title">Moments &amp; Promises</h2>
+          <p class="section-subtitle">Five snapshots of why you mean the world to me</p>
+        </div>
+
+        <div class="memories-list">
+          <!-- Photo 1: Image Left, Message Right -->
+          <article class="memory-row image-left reveal-item">
+            <div class="memory-photo-col">
+              <div class="memory-photo-wrapper">
+                <img src="photo/image7.jpeg" alt="Memory 1" loading="lazy" />
+              </div>
+            </div>
+            <div class="memory-connector" aria-hidden="true">
+              <span class="connector-dot">01</span>
+            </div>
+            <div class="memory-text-col">
+              <div class="memory-message-card">
+                <span class="quote-mark" aria-hidden="true">“</span>
+                <p class="memory-message-text">you will always be my comfort</p>
+                <span class="memory-heart-accent" aria-hidden="true">🌿</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Photo 2: Message Left, Image Right -->
+          <article class="memory-row image-right reveal-item">
+            <div class="memory-text-col">
+              <div class="memory-message-card">
+                <span class="quote-mark" aria-hidden="true">“</span>
+                <p class="memory-message-text">Even on my worst days, just talking to you fixes everything 🥹</p>
+                <span class="memory-heart-accent" aria-hidden="true">💗</span>
+              </div>
+            </div>
+            <div class="memory-connector" aria-hidden="true">
+              <span class="connector-dot">02</span>
+            </div>
+            <div class="memory-photo-col">
+              <div class="memory-photo-wrapper">
+                <img src="photo/image8.jpeg" alt="Memory 2" loading="lazy" />
+              </div>
+            </div>
+          </article>
+
+          <!-- Photo 3: Image Left, Message Right -->
+          <article class="memory-row image-left reveal-item">
+            <div class="memory-photo-col">
+              <div class="memory-photo-wrapper">
+                <img src="photo/image9.jpeg" alt="Memory 3" loading="lazy" />
+              </div>
+            </div>
+            <div class="memory-connector" aria-hidden="true">
+              <span class="connector-dot">03</span>
+            </div>
+            <div class="memory-text-col">
+              <div class="memory-message-card">
+                <span class="quote-mark" aria-hidden="true">“</span>
+                <p class="memory-message-text">wishing you endless patience for my mood swings this year.🫢</p>
+                <span class="memory-heart-accent" aria-hidden="true">✨</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Photo 4: Message Left, Image Right -->
+          <article class="memory-row image-right reveal-item">
+            <div class="memory-text-col">
+              <div class="memory-message-card">
+                <span class="quote-mark" aria-hidden="true">“</span>
+                <p class="memory-message-text">you might annoy me 24/7, but I know you are the only one who truly cares for me. 🫠</p>
+                <span class="memory-heart-accent" aria-hidden="true">🤍</span>
+              </div>
+            </div>
+            <div class="memory-connector" aria-hidden="true">
+              <span class="connector-dot">04</span>
+            </div>
+            <div class="memory-photo-col">
+              <div class="memory-photo-wrapper">
+                <img src="photo/image10.jpeg" alt="Memory 4" loading="lazy" />
+              </div>
+            </div>
+          </article>
+
+          <!-- Photo 5: Image Left, Message Right -->
+          <article class="memory-row image-left reveal-item">
+            <div class="memory-photo-col">
+              <div class="memory-photo-wrapper">
+                <img src="photo/image11.jpeg" alt="Memory 5" loading="lazy" />
+              </div>
+            </div>
+            <div class="memory-connector" aria-hidden="true">
+              <span class="connector-dot">05</span>
+            </div>
+            <div class="memory-text-col">
+              <div class="memory-message-card">
+                <span class="quote-mark" aria-hidden="true">“</span>
+                <p class="memory-message-text">May your smile never fade, because that's the best part of your face❤️</p>
+                <span class="memory-heart-accent" aria-hidden="true">🌸</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         PAGE 4: VOICE NOTE & CLOSING
+         ========================================== -->
+    <section class="page-section voicenote-section" id="section-voicenote">
+      <div class="section-inner narrow-inner">
+        <div class="voicenote-card reveal-item">
+          <span class="voicenote-badge">Personal Voice Note</span>
+          <h2 class="voicenote-heading">A little something for you ❤️</h2>
+          <p class="voicenote-caption">Press play whenever you're ready to listen</p>
+
+          <!-- Custom Audio Player -->
+          <div class="voice-player" id="voicePlayer">
+            <button type="button" class="voice-play-btn" id="voicePlayBtn" aria-label="Play voice note">
+              <svg class="icon-play" id="voicePlayIcon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M8 5.14v14l11-7-11-7z" />
+              </svg>
+              <svg class="icon-pause hidden" id="voicePauseIcon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
+              </svg>
+            </button>
+
+            <div class="voice-track-area">
+              <!-- Animated Waveform Bars -->
+              <div class="waveform-bars" id="waveformBars" aria-hidden="true">
+                <span class="w-bar" style="--h: 35%"></span>
+                <span class="w-bar" style="--h: 55%"></span>
+                <span class="w-bar" style="--h: 75%"></span>
+                <span class="w-bar" style="--h: 45%"></span>
+                <span class="w-bar" style="--h: 90%"></span>
+                <span class="w-bar" style="--h: 65%"></span>
+                <span class="w-bar" style="--h: 40%"></span>
+                <span class="w-bar" style="--h: 80%"></span>
+                <span class="w-bar" style="--h: 95%"></span>
+                <span class="w-bar" style="--h: 60%"></span>
+                <span class="w-bar" style="--h: 50%"></span>
+                <span class="w-bar" style="--h: 85%"></span>
+                <span class="w-bar" style="--h: 70%"></span>
+                <span class="w-bar" style="--h: 40%"></span>
+                <span class="w-bar" style="--h: 75%"></span>
+                <span class="w-bar" style="--h: 100%"></span>
+                <span class="w-bar" style="--h: 65%"></span>
+                <span class="w-bar" style="--h: 50%"></span>
+                <span class="w-bar" style="--h: 85%"></span>
+                <span class="w-bar" style="--h: 60%"></span>
+                <span class="w-bar" style="--h: 45%"></span>
+                <span class="w-bar" style="--h: 78%"></span>
+                <span class="w-bar" style="--h: 92%"></span>
+                <span class="w-bar" style="--h: 55%"></span>
+                <span class="w-bar" style="--h: 42%"></span>
+                <span class="w-bar" style="--h: 68%"></span>
+                <span class="w-bar" style="--h: 50%"></span>
+                <span class="w-bar" style="--h: 38%"></span>
+              </div>
+
+              <!-- Seekable Progress Bar -->
+              <div class="voice-progress-wrap" id="voiceProgressWrap" role="slider" aria-label="Seek voice note" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0">
+                <div class="voice-progress-track">
+                  <div class="voice-progress-fill" id="voiceProgressFill"></div>
+                </div>
+              </div>
+
+              <!-- Timestamps -->
+              <div class="voice-time-row">
+                <span id="voiceCurrentTime">0:00</span>
+                <span id="voiceTotalDuration">0:00</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Final Closing Birthday Wish -->
+        <footer class="closing-footer reveal-item">
+          <div class="closing-heart-burst" id="celebrateBtnWrap">
+            <button type="button" class="celebrate-heart-btn" id="sendLoveBtn" aria-label="Send birthday love burst">
+              <span>💗</span>
+            </button>
+          </div>
+          <p class="closing-line">Forever &amp; always yours, chaku</p>
+          <p class="closing-subline">Happy Birthday, my V 💌</p>
+        </footer>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==========================================
+       SPECIAL SURPRISE: RONALDO SUIIII POPUP
+       ========================================== -->
+  <div class="ronaldo-surprise-overlay" id="ronaldoOverlay" aria-hidden="true">
+    <div class="ronaldo-popup-card" id="ronaldoCard">
+      <div class="ronaldo-burst-ring" aria-hidden="true"></div>
+      <div class="ronaldo-img-box">
+        <img src="photo/image1.jpeg" alt="Ronaldo SUIIII Celebration" id="ronaldoImg" />
+      </div>
+      <div class="ronaldo-banner">SUIIIIII! 😂⚡</div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
